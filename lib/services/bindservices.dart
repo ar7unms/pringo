@@ -5,7 +5,7 @@ import 'package:pringooo/models/uploadmodel.dart';
 import 'package:http/http.dart' as http;
 
 class BindService {
-  final String baseUrl = "http://192.168.211.53:3001/api/bind"; // Replace with your Node.js server URL
+  final String baseUrl = "http://192.168.178.53:3001/api/bind"; // Replace with your Node.js server URL
 
   Future<dynamic> uploadFile(String userid, String nofpage,String type,String noofbind, String color, String filePath, bool i) async {
     try {
@@ -54,7 +54,7 @@ class BindService {
 
   Future<List<Bind>> getalluser() async {
     var client = http.Client();
-    var apiUrl = Uri.parse("http://192.168.211.53:3001/api/bind/viewnotupdated");
+    var apiUrl = Uri.parse("http://192.168.178.53:3001/api/bind/viewnotupdated");
     var response = await client.post(apiUrl,
       headers: <String,String>{
         "Content-Type": "application/json; charset=UTF-8"

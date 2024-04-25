@@ -97,6 +97,14 @@ class _printnotifyState extends State<printnotify> {
                   color: Colors.white,
                   onPressed: () {},
                 ),
+                Text(
+                  'Print notify',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 Container(
                   height: 90,
                   width: 125.0,

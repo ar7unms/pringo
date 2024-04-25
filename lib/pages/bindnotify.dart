@@ -97,6 +97,14 @@ class _bindnotifyState extends State<bindnotify> {
                   color: Colors.white,
                   onPressed: () {},
                 ),
+                Text(
+                  'Bind notify',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 Container(
                   height: 90,
                   width: 125.0,

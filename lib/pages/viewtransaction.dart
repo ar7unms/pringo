@@ -60,21 +60,22 @@ class _ViewTransactionPageState extends State<ViewTransactionPage> {
                     color: Colors.white,
                     onPressed: () {},
                   ),
+                  Text(
+                    'Transactions',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 40.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   Container(
                     height: 90,
                     width: 125.0,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text(
-                          'Transactions',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 40.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(width: 50,),
+
+
                         IconButton(
                           icon: Icon(Icons.filter_list),
                           color: Colors.white,

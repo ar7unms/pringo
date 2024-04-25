@@ -5,7 +5,7 @@ import 'package:pringooo/models/transactionModel.dart';
 class transactionApi {
   Future<dynamic> pay(String userid, String type,String amount) async {
     var client = http.Client();
-    var url = Uri.parse("http://192.168.211.53:3001/api/transaction/pay");
+    var url = Uri.parse("http://192.168.178.53:3001/api/transaction/pay");
     var response = await client.post(url,
         headers: <String, String>{
           "Content-Type": "application/json ; charset=UTF-8"
@@ -28,7 +28,7 @@ class transactionApi {
 
   Future<dynamic> calcamount(String color,String noofpage,String noofcopy) async {
   var client = http.Client();
-  var apiUri = Uri.parse("http://192.168.211.53:3001/api/transaction/calcamount");
+  var apiUri = Uri.parse("http://192.168.178.53:3001/api/transaction/calcamount");
   var response = await client.post(apiUri,
   headers: <String, String>{
   "Content-Type": "application/json; charset=UTF-8"
@@ -45,7 +45,7 @@ class transactionApi {
 
   Future<dynamic> calamount(String color,String noofpage,String noofbind,String type) async {
     var client = http.Client();
-    var apiUri = Uri.parse("http://192.168.211.53:3001/api/transaction/calamount");
+    var apiUri = Uri.parse("http://192.168.178.53:3001/api/transaction/calamount");
     var response = await client.post(apiUri,
         headers: <String, String>{
           "Content-Type": "application/json; charset=UTF-8"
@@ -63,7 +63,7 @@ class transactionApi {
 
   Future<List<Update>> gettransacyionApi(String userid) async {
     var client = http.Client();
-    var apiUrl = Uri.parse("http://192.168.211.53:3001/api/transaction/search");
+    var apiUrl = Uri.parse("http://192.168.178.53:3001/api/transaction/search");
     var response = await client.post(apiUrl,
     headers: <String,String>{
       "Content-Type": "application/json; charset=UTF-8"
