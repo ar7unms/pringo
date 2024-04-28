@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:pringooo/models/transactionModel.dart';
 
 class transactionApi {
+
   Future<dynamic> pay(String userid, String type,String amount) async {
     var client = http.Client();
     var url = Uri.parse("http://192.168.178.53:3001/api/transaction/pay");
@@ -77,4 +78,74 @@ class transactionApi {
       return [];
     }
   }
+
+  Future<dynamic> toadytotal() async {
+    var client = http.Client();
+    var apiUri = Uri.parse("http://192.168.178.53:3001/api/transaction/todayscollection");
+    var response = await client.post(apiUri,
+        headers: <String, String>{
+          "Content-Type": "application/json; charset=UTF-8"
+        }
+       );
+
+    if (response.statusCode == 200) {
+      var resp = response.body;
+      return jsonDecode(resp);
+    } else {
+      throw Exception("Failed to get amount ");
+    }
+  }
+
+  Future<dynamic> toadybindtotal() async {
+    var client = http.Client();
+    var apiUri = Uri.parse("http://192.168.178.53:3001/api/transaction/todaysbindcollection");
+    var response = await client.post(apiUri,
+        headers: <String, String>{
+          "Content-Type": "application/json; charset=UTF-8"
+        }
+    );
+
+    if (response.statusCode == 200) {
+      var resp = response.body;
+      return jsonDecode(resp);
+    } else {
+      throw Exception("Failed to get amount ");
+    }
+  }
+
+  Future<dynamic> toadyprinttotal() async {
+    var client = http.Client();
+    var apiUri = Uri.parse("http://192.168.178.53:3001/api/transaction/todaysprintcollection");
+    var response = await client.post(apiUri,
+        headers: <String, String>{
+          "Content-Type": "application/json; charset=UTF-8"
+        }
+    );
+
+    if (response.statusCode == 200) {
+      var resp = response.body;
+      return jsonDecode(resp);
+    } else {
+      throw Exception("Failed to get amount ");
+    }
+  }
+
+
+  Future<List<Update>> toadytrans() async {
+    var client = http.Client();
+    var apiUri = Uri.parse("http://192.168.178.53:3001/api/transaction/todayscollections");
+    var response = await client.post(apiUri,
+        headers: <String, String>{
+          "Content-Type": "application/json; charset=UTF-8"
+        }
+    );
+
+    if (response.statusCode == 200) {
+      var resp = response.body;
+      return jsonDecode(response.body) as Future<List<Update>>;
+    } else {
+      throw Exception("Failed to get amount ");
+    }
+  }
+
 }

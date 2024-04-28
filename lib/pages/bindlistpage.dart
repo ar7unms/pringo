@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pringooo/models/bindmodel.dart';
+import 'package:pringooo/pages/adminlogin.dart';
+import 'package:pringooo/pages/dailytransaction.dart';
 import 'package:pringooo/services/bindservices.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
@@ -108,10 +110,41 @@ class _BindListPageState extends State<BindListPage> {
                       color: Colors.white,
                       onPressed: () {},
                     ),
-                    IconButton(
-                      icon: Icon(Icons.menu),
-                      color: Colors.white,
-                      onPressed: () {},
+                    PopupMenuButton<String>(
+                      icon: Icon(Icons.menu,color: Colors.white,),
+                      itemBuilder:(BuildContext context)=><PopupMenuEntry<String>>[
+                        PopupMenuItem<String>(
+                          value:'Sign out',
+                          child: Text("SIGN OUT"),
+                        ),
+                        PopupMenuItem<String>(
+                            value: 'Todays Transaction',
+                            child: Text("Todays Transaction"))
+                      ],
+                      onSelected: (String value){
+                        switch(value){
+                          case 'Sign out':
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Do you wanna signout ?'),
+                                  content: Text('SIGN OUT ?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>adminlogin()));
+                                      },
+                                      child: Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          case 'Todays Transaction':
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>todaytransPage()));
+                        }
+                      },
                     )
                   ],
                 ),

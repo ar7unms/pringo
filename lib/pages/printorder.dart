@@ -6,6 +6,7 @@ import 'dart:io';
 
 import 'package:pringooo/models/uploadmodel.dart';
 import 'package:pringooo/pages/adminlogin.dart';
+import 'package:pringooo/pages/dailytransaction.dart';
 import 'package:pringooo/services/uploadservices.dart';
 
 class PrintListPage extends StatefulWidget {
@@ -116,7 +117,10 @@ class _PrintListPageState extends State<PrintListPage> {
                            PopupMenuItem<String>(
                              value:'Sign out',
                              child: Text("SIGN OUT"),
-                           )
+                           ),
+                           PopupMenuItem<String>(
+                               value: 'Todays Transaction',
+                               child: Text("Todays Transaction"))
                          ],
                        onSelected: (String value){
                             switch(value){
@@ -138,6 +142,8 @@ class _PrintListPageState extends State<PrintListPage> {
                                     );
                                   },
                                 );
+                              case 'Todays Transaction':
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>todaytransPage()));
                             }
                        },
                      )
