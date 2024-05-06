@@ -77,16 +77,6 @@ class _todaytransPageState extends State<todaytransPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.amber,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Navigate to upload screen
-        },
-        backgroundColor: Colors.amber,
-        child: Icon(
-          Icons.arrow_forward,
-          color: Colors.black,
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -100,29 +90,17 @@ class _todaytransPageState extends State<todaytransPage> {
                   icon: Icon(Icons.arrow_back_ios),
                   color: Colors.white,
                   onPressed: () {
+                    Navigator.pop(context);
                   },
                 ),
 
                 SizedBox(width: 30),
-                Row(
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.filter_list),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.menu),
-                      color: Colors.white,
-                      onPressed: () {},
-                    )
-                  ],
-                ),
+
               ],
             ),
             SizedBox(height: 25.0),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 80.0,),
               child:   Column(
                 children: [
                   Text(
@@ -155,10 +133,10 @@ class _todaytransPageState extends State<todaytransPage> {
                         children: [
                           Container(
                             padding: EdgeInsets.only(top: 50),
-                            height: 300,
+                            height: 600,
                             width: 300,
                             decoration: BoxDecoration(
-
+                              boxShadow: [BoxShadow(color: Colors.black,blurRadius: 20)],
                               color: Colors.amber,
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10.0),
@@ -166,103 +144,114 @@ class _todaytransPageState extends State<todaytransPage> {
                               )
                             ),
                             child:
-                            Column(
-                              children: [
-                                Center(
-                                  child: Text(
-                                    'TOTAL PRINT',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 25.0,
-                                      fontWeight: FontWeight.bold,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 200),
+                              child: Column(
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      'TOTAL PRINT',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 25.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Center(
-                                  child: Text(
-                                    printamount,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 25.0,
-                                      fontWeight: FontWeight.bold,
+                                  Center(
+                                    child: Text(
+                                      printamount,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 25.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         SizedBox(width: 20,),
                       Container(
-                        height: 300,
+                        height: 600,
                         width: 300,
                         padding: EdgeInsets.only(top: 50),
                         decoration: BoxDecoration(
                             color: Colors.amber,
+                            boxShadow: [BoxShadow(color: Colors.black,blurRadius: 20)],
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10.0),
                               topRight: Radius.circular(10.0),
                             )
                         ),
-                        child:  Column(
-                          children: [
-                            Center(
-                              child: Text(
-                                'TOTAL BIND',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25.0,
-                                  fontWeight: FontWeight.bold,
+                        child:  Padding(
+                          padding: const EdgeInsets.only(top: 200),
+                          child: Column(
+                            children: [
+                              Center(
+                                child: Text(
+                                  'TOTAL BIND',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Center(
-                              child: Text(
-                                bindamount,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25.0,
-                                  fontWeight: FontWeight.bold,
+                              Center(
+                                child: Text(
+                                  bindamount,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                           SizedBox(width: 20,),
                           Container(
-                            height: 300,
+                            height: 600,
                             width: 300,
                             padding: EdgeInsets.only(top: 50),
                             decoration: BoxDecoration(
                                 color: Colors.amber,
+                                boxShadow: [BoxShadow(color: Colors.black,blurRadius: 20)],
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10.0),
                                   topRight: Radius.circular(10.0),
                                 )
                             ),
-                            child:  Column(
-                              children: [
-                                Center(
-                                  child: Text(
-                                    'TOTAL AMOUNT',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 25.0,
-                                      fontWeight: FontWeight.bold,
+                            child:  Padding(
+                              padding: const EdgeInsets.only(top:200),
+                              child: Column(
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      'TOTAL AMOUNT',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 25.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Center(
-                                  child: Text(
-                                    amount,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 25.0,
-                                      fontWeight: FontWeight.bold,
+                                  Center(
+                                    child: Text(
+                                      amount,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 25.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ],

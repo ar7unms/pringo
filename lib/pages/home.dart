@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pringooo/pages/LoginScreen.dart';
 import 'package:pringooo/pages/bindtransaction.dart';
+import 'package:pringooo/pages/printhistory.dart';
 import 'package:pringooo/pages/transactionpage.dart';
+import 'package:pringooo/pages/viewhistory.dart';
 import 'package:pringooo/pages/viewnotfy.dart';
 import 'package:pringooo/pages/viewtransaction.dart';
 
@@ -52,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         icon: Icon(Icons.filter_list),
                         color: Colors.white,
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>viewnotify()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewNotify()));
                         },
                       ),
                       PopupMenuButton<String>(
@@ -65,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           PopupMenuItem<String>(
                             value:'Transactions',
                             child: Text("Transactions"),
-                          )
+                          ),
                         ],
                         onSelected: (String value){
                           switch(value){
@@ -103,7 +106,11 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.only(left: 40.0),
           child: Row(
             children: <Widget>[
-              Flexible(child: email,fit: FlexFit.tight,),
+             SizedBox(width: 400,
+               child: ElevatedButton(onPressed:(){Navigator.push(context,MaterialPageRoute(builder: (context) => Viewhistory()));
+                           },
+                child: Text("VIEW HISTORY"),),
+             ),
               SizedBox(width: 10.0),
 
             ],
@@ -131,92 +138,124 @@ class _MyHomePageState extends State<MyHomePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                  child: GridView.count(
-                                    crossAxisCount: 2,
-                                    scrollDirection: Axis.vertical,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
                                     padding: EdgeInsets.all(25),
                                     children: <Widget>[
-                                      InkWell(
-                                        onTap: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>TransactionPage()));
-                                        },
-                                        child: Card(
-                                          color: Colors.amber,
-                                          elevation: 5,
-                                          margin: EdgeInsets.all(10),
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(15.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                              children: <Widget>[
-                                                SizedBox(height: 60),
-                                                Center(
-                                                  child: Text(
-                                                    "COPY",
-                                                    textAlign: TextAlign.start,
-                                                    style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 20.5,
+                                      Row(
+                                        children: [
+                                          InkWell(
+                                            onTap: (){
+                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>TransactionPage()));
+                                            },
+                                              child: SizedBox(width: 400,
+                                                child: Card(
+                                                  color: Colors.amber,
+                                                  elevation: 5,
+                                                  margin: EdgeInsets.all(10),
+                                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(15.0),
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: <Widget>[
+                                                        Container(
+                                                          height: 500,
+                                                          width: 350,
+                                                          decoration: BoxDecoration(
+                                                            color: Colors.amber
+                                                          ),
+                                                          child:
+                                                          SvgPicture.asset(
+                                                            'assets/undraw_printing_invoices_-5-r4r.svg',
+                                                            width: 100, // Set the width of the SVG image
+                                                            height: 100, // Set the height of the SVG image
+                                                          ),
+                                                        ),
+                                                        SizedBox(height: 60),
+                                                        Center(
+                                                          child: Text(
+                                                            "COPY",
+                                                            textAlign: TextAlign.start,
+                                                            style: TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 20.5,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Center(
+                                                          child: Text('CLICK TO COPY',
+                                                            textAlign: TextAlign.start,
+                                                            style: TextStyle(
+                                                              color: Colors.grey[800],
+                                                              fontWeight: FontWeight.w100,
+                                                              fontSize: 12.5,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
-                                                Center(
-                                                  child: Text('CLICK TO COPY',
-                                                    textAlign: TextAlign.start,
-                                                    style: TextStyle(
-                                                      color: Colors.grey[800],
-                                                      fontWeight: FontWeight.w100,
-                                                      fontSize: 12.5,
-                                                    ),
+                                              ),
+                                          ),
+                                          InkWell(
+                                            onTap: (){
+                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>transactionPage()));
+                                            },
+                                            child: SizedBox(width: 400,
+                                              child: Card(
+                                                color: Colors.amber,
+                                                elevation: 5,
+                                                margin: EdgeInsets.all(10),
+                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(15.0),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                                                    children: <Widget>[
+                                                      Container(
+                                                        height: 500,
+                                                        width: 350,
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.amber
+                                                        ),
+                                                        child:
+                                                        SvgPicture.asset(
+                                                          'assets/undraw_education_f8ru.svg',
+                                                          width: 100, // Set the width of the SVG image
+                                                          height: 100, // Set the height of the SVG image
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 60),
+                                                      Center(
+                                                        child: Text(
+                                                          "BINDING",
+                                                          textAlign: TextAlign.start,
+                                                          style: TextStyle(
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 20.5,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Center(
+                                                        child: Text('CLICK TO BIND',
+                                                          textAlign: TextAlign.start,
+                                                          style: TextStyle(
+                                                            color: Colors.grey[800],
+                                                            fontWeight: FontWeight.w100,
+                                                            fontSize: 12.5,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                              ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>transactionPage()));
-                                        },
-                                        child: Card(
-                                          color: Colors.amber,
-                                          elevation: 5,
-                                          margin: EdgeInsets.all(10),
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(15.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                              children: <Widget>[
-                                                SizedBox(height: 60),
-                                                Center(
-                                                  child: Text(
-                                                    "BINDING",
-                                                    textAlign: TextAlign.start,
-                                                    style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 20.5,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Center(
-                                                  child: Text('CLICK TO BIND',
-                                                    textAlign: TextAlign.start,
-                                                    style: TextStyle(
-                                                      color: Colors.grey[800],
-                                                      fontWeight: FontWeight.w100,
-                                                      fontSize: 12.5,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
+                                        ],
                                       ),
                                     ],
                                   ),

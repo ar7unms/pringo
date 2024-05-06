@@ -205,7 +205,7 @@ class _uploadScreen1State extends State<uploadScreen1> {
                         isprocessing =true;
                       }
                       );
-                      await Future.delayed(Duration(seconds: 20));
+                      await Future.delayed(Duration(seconds: 10));
 
                       setState(() {
                         isprocessing=false;

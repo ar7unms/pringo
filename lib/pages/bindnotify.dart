@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:pringooo/models/bindmodel.dart';
 
 import 'package:pringooo/models/uploadmodel.dart';
+import 'package:pringooo/pages/home.dart';
 import 'package:pringooo/services/bindservices.dart';
 import 'package:pringooo/services/uploadservices.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,7 +37,7 @@ class _bindnotifyState extends State<bindnotify> {
 
   Future<void> downloadFile(String docPath) async {
     try {
-      var response = await http.get(Uri.parse('http://192.168.211.53:3001/uploads/$docPath'));
+      var response = await http.get(Uri.parse('http://192.168.178.53:3001/uploads/$docPath'));
 
       if (response.statusCode == 200) {
         String? contentType = response.headers['content-type'];
@@ -129,23 +130,16 @@ class _bindnotifyState extends State<bindnotify> {
             SizedBox(height: 25.0),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: TextField(
-                controller: searchController,
-                decoration: InputDecoration(
-                  filled: true,
-                  suffixIcon: Icon(Icons.search),
-                  fillColor: Colors.white,
-                  hintText: 'Search by name or type',
-                  contentPadding: EdgeInsets.all(15),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(25.7),
+              child: Row(
+                children: <Widget>[
+                  SizedBox(width: 400,
+                    child: ElevatedButton(onPressed:(){Navigator.push(context,MaterialPageRoute(builder: (context) => MyHomePage()));
+                    },
+                      child: Text("HOME PAGE"),),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(25.7),
-                  ),
-                ),
+                  SizedBox(width: 10.0),
+
+                ],
               ),
             ),
             SizedBox(height: 25.0),

@@ -104,9 +104,8 @@ class _ViewTransactionPageState extends State<ViewTransactionPage> {
                       controller: n1,
                       decoration: InputDecoration(
                         filled: true,
-                        suffixIcon: Icon(Icons.search),
                         fillColor: Colors.white,
-                        hintText: 'Search the file by name or type.',
+                        hintText: '',
                         contentPadding: const EdgeInsets.all(15),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),

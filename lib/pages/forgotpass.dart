@@ -42,16 +42,26 @@ class _ForgotPageState extends State<ForgotPage> {
                 color: Colors.white,
                 onPressed: () {},
               ),
+              Text(
+                'FORGOT PASSWORD',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               Container(
                   width: 125.0,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
+
                       IconButton(
                         icon: Icon(Icons.filter_list),
                         color: Colors.white,
                         onPressed: () {},
                       ),
+
                       IconButton(
                         icon: Icon(Icons.menu),
                         color: Colors.white,

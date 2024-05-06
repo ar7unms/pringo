@@ -1,24 +1,27 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:pringooo/models/demomodel.dart';
+import 'package:pringooo/models/demomodel2.dart';
 import 'dart:io';
-import 'package:intl/intl.dart';
-import 'package:pringooo/models/bindmodel.dart';
 
 import 'package:pringooo/models/uploadmodel.dart';
+import 'package:pringooo/pages/adminlogin.dart';
+import 'package:pringooo/pages/dailytransaction.dart';
 import 'package:pringooo/pages/home.dart';
 import 'package:pringooo/services/bindservices.dart';
 import 'package:pringooo/services/uploadservices.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class printnotify extends StatefulWidget {
+class bindhistory extends StatefulWidget {
   @override
-  _printnotifyState createState() => _printnotifyState();
+  _bindhistoryState createState() => _bindhistoryState();
 }
 
-class _printnotifyState extends State<printnotify> {
-  late Future<List<Upload>>? data = null;
-
+class _bindhistoryState extends State<bindhistory> {
+  late Future<List<Demoo>>? data;
+  final String fpath = "";
 
   @override
   void initState() {
@@ -28,17 +31,15 @@ class _printnotifyState extends State<printnotify> {
 
   _loadData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String userid = preferences.getString("userid") ?? "";
+    String userId = preferences.getString("userid") ?? "";
     setState(() {
-      data = ApiService().viewnotify(userid);
+      data = BindService().getPrintHistory(userId);
     });
   }
-
 
   Future<void> downloadFile(String docPath) async {
     try {
       var response = await http.get(Uri.parse('http://192.168.178.53:3001/uploads/$docPath'));
-
       if (response.statusCode == 200) {
         String? contentType = response.headers['content-type'];
 
@@ -99,10 +100,10 @@ class _printnotifyState extends State<printnotify> {
                   onPressed: () {},
                 ),
                 Text(
-                  'Print notify',
+                  'HISTORY OF BINDS',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 40.0,
+                    fontSize: 30.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -112,11 +113,47 @@ class _printnotifyState extends State<printnotify> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      SizedBox(width: 20,),
                       IconButton(
-                        icon: Icon(Icons.menu),
+                        icon: Icon(Icons.filter_list),
                         color: Colors.white,
                         onPressed: () {},
+                      ),
+                      PopupMenuButton<String>(
+                        icon: Icon(Icons.menu, color: Colors.white),
+                        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                          PopupMenuItem<String>(
+                            value: 'Sign out',
+                            child: Text("SIGN OUT"),
+                          ),
+                          PopupMenuItem<String>(
+                              value: 'Todays Transaction', child: Text("Todays Transaction"))
+                        ],
+                        onSelected: (String value) {
+                          switch (value) {
+                            case 'Sign out':
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('Do you wanna signout ?'),
+                                    content: Text('SIGN OUT ?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => adminlogin()));
+                                        },
+                                        child: Text('OK'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                              break;
+                            case 'Todays Transaction':
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => todaytransPage()));
+                              break;
+                          }
+                        },
                       )
                     ],
                   ),
@@ -150,85 +187,68 @@ class _printnotifyState extends State<printnotify> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: FutureBuilder(
+                  child: data != null ? FutureBuilder(
                     future: data,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasError) {
                         return Center(child: Text('Error: ${snapshot.error}'));
-                      } else if (snapshot.hasData) {
-                        List<Upload> transactionData = snapshot.data as List<Upload>;
-
+                      } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                         return ListView.builder(
-                          itemCount: transactionData.length,
+                          itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
                             return Card(
                               elevation: 3,
                               margin: EdgeInsets.symmetric(vertical: 10),
                               child: ListTile(
                                 title: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start, // Align text at the top
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "COLOR: ${transactionData[index].color}",
+                                            "COLOR:" + snapshot.data![index].color.toString(),
                                             style: TextStyle(fontWeight: FontWeight.bold),
                                           ),
                                           Text(
-                                            "NO OF COPY: ${transactionData[index].noofcopy}",
+                                            "NO OF BIND:" + snapshot.data![index].noofbind.toString(),
                                             style: TextStyle(fontWeight: FontWeight.bold),
                                           ),
-
+                                          Text(
+                                            "TYPE:" + snapshot.data![index].type.toString(),
+                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                          ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(width: 10), // Add space between columns
-                                    Column(
-                                      children: [
-                                        SizedBox(height: 20),
-                                        IconButton( // Use IconButton for Notify button
-                                          onPressed: () async {
-                                            final response = await ApiService().notify(transactionData[index].id.toString());
-                                            if (response['status'] == "status updated") {
-                                              ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text('Notification sent')),
-                                              );
-                                            }
-                                            final response1 = await ApiService().notifyadmin(transactionData[index].id.toString());
-                                          },
-                                          icon: Icon(Icons.done_all),
-                                          tooltip: 'Notify',
-                                        ),
-                                      ],
+                                    SizedBox(
+                                      width: 19,
                                     ),
                                   ],
                                 ),
                                 subtitle: Text(
-                                  DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse(transactionData[index].datetime.toString())),
+                                  snapshot.data![index].datetime.toString(),
                                   style: TextStyle(fontWeight: FontWeight.w500),
                                 ),
-                                trailing: IconButton( // Use IconButton for Download button
+                                trailing: IconButton(
                                   onPressed: () {
-                                    print(transactionData[index].docpath.toString());
-                                    downloadFile(transactionData[index].docpath.toString());
+                                    downloadFile(snapshot.data![index].docpath.toString());
                                   },
                                   icon: Icon(Icons.download),
                                   tooltip: 'Download',
                                 ),
                               ),
                             );
-
                           },
                         );
                       } else {
                         return Center(child: Text('No data available'));
                       }
                     },
-                  ),
+                  ) : Container(), // Provide a fallback container if data is null
                 ),
               ),
             ),

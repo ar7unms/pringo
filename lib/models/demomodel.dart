@@ -1,19 +1,14 @@
+// To parse this JSON data, do
+//
+//     final demo = demoFromJson(jsonString);
+
 import 'dart:convert';
 
-List<Upload> uploadFromJson(String str) {
-  try {
-    if (str == null) {
-      return []; // Return an empty list if the JSON string is null
-    }
-    final List<dynamic> parsedJson = json.decode(str);
-    return parsedJson.map((json) => Upload.fromJson(json)).toList();
-  } catch (e) {
-    print('Error parsing JSON: $e');
-    return []; // Return an empty list or handle the error as needed
-  }
-}
+List<Demo> demoFromJson(String str) => List<Demo>.from(json.decode(str).map((x) => Demo.fromJson(x)));
 
-class Upload {
+String demoToJson(List<Demo> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+class Demo {
   int id;
   int userid;
   int start;
@@ -21,10 +16,11 @@ class Upload {
   int noofcopy;
   String color;
   String docpath;
+  int status;
+  int notify;
   DateTime datetime;
-  String name;
 
-  Upload({
+  Demo({
     required this.id,
     required this.userid,
     required this.start,
@@ -32,11 +28,12 @@ class Upload {
     required this.noofcopy,
     required this.color,
     required this.docpath,
+    required this.status,
+    required this.notify,
     required this.datetime,
-    required this.name,
   });
 
-  factory Upload.fromJson(Map<String, dynamic> json) => Upload(
+  factory Demo.fromJson(Map<String, dynamic> json) => Demo(
     id: json["id"],
     userid: json["userid"],
     start: json["start"],
@@ -44,8 +41,9 @@ class Upload {
     noofcopy: json["noofcopy"],
     color: json["color"],
     docpath: json["docpath"],
+    status: json["status"],
+    notify: json["notify"],
     datetime: DateTime.parse(json["datetime"]),
-    name: json["name"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -56,7 +54,8 @@ class Upload {
     "noofcopy": noofcopy,
     "color": color,
     "docpath": docpath,
+    "status": status,
+    "notify": notify,
     "datetime": datetime.toIso8601String(),
-    "name": name,
   };
 }

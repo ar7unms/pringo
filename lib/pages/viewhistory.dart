@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pringooo/pages/bindhistory.dart';
 import 'package:pringooo/pages/bindnotify.dart';
+import 'package:pringooo/pages/printhistory.dart';
 import 'package:pringooo/pages/printnotify.dart';
 
-class ViewNotify extends StatefulWidget {
+class Viewhistory extends StatefulWidget {
   @override
-  _ViewNotifyState createState() => _ViewNotifyState();
+  _ViewhistoryState createState() => _ViewhistoryState();
 }
 
-class _ViewNotifyState extends State<ViewNotify> {
+class _ViewhistoryState extends State<Viewhistory> {
   final List<Widget> pages = [
-    printnotify(),
-    bindnotify()
+    printhistory(),
+    bindhistory()
   ];
   int currentIndex = 0;
 
@@ -53,8 +55,4 @@ class _ViewNotifyState extends State<ViewNotify> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(ViewNotify());
 }

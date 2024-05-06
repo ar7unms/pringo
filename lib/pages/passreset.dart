@@ -97,7 +97,7 @@ class _PassresetState extends State<Passreset> {
                                       Center(
                                         child: Column(
                                           children: [
-                                            SizedBox(height: 50,),
+                                            //SizedBox(height: 3,),
                                             CardTextField(
                                                 labelText: "Enter password",
                                                 icon: Icons.key,
