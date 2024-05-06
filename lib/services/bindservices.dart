@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:pringooo/models/bindmodel.dart';
+import 'package:pringooo/models/demomodel2.dart';
 import 'package:pringooo/models/uploadmodel.dart';
 import 'package:http/http.dart' as http;
 
@@ -137,6 +138,25 @@ class BindService {
     } catch (e) {
       print('Error fetching bind notifications: $e');
       throw Exception('Error fetching bind notifications');
+    }
+  }
+
+  Future<List<Demoo>>getPrintHistory(String userId) async {
+    try {
+      var response = await http.post(
+        Uri.parse('http://192.168.178.53:3001/api/bind/printhistor'),
+        body: {'userid': userId},
+      );
+
+      if (response.statusCode == 200) {
+        print("///////////"+response.body);
+        return demooFromJson(response.body);
+      } else {
+        throw Exception('Failed to fetch print history: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching print history: $e');
+      throw Exception('Error fetching print history: $e');
     }
   }
 

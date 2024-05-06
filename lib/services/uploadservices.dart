@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:pringooo/models/demomodel.dart';
 import 'package:pringooo/models/uploadmodel.dart';
 import 'package:http/http.dart' as http;
 
@@ -116,6 +117,26 @@ class ApiService {
       throw Exception('Error notifying');
     }
   }
+  Future<List<Demo>> getPrintHistory(String userId) async {
+    try {
+      var response = await http.post(
+        Uri.parse('http://192.168.178.53:3001/api/print/printhistory'),
+        body: {'userid': userId},
+      );
+
+      if (response.statusCode == 200) {
+        print("///////////"+response.body);
+        return demoFromJson(response.body);
+      } else {
+        throw Exception('Failed to fetch print history: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching print history: $e');
+      throw Exception('Error fetching print history: $e');
+    }
+  }
+
+
   Future<List<Upload>> viewnotify(String userid) async {
 
       var response = await http.post(
@@ -133,4 +154,5 @@ class ApiService {
       }
 
   }
+
 }

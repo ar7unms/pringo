@@ -89,30 +89,6 @@ class _adminloginState extends State<adminlogin> {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Don't you have account?", style: TextStyle(color: Colors.black),),
-                    TextButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.amber,
-                        ),onPressed: ()
-                    {
-                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpPage()));
-                    }, child: Text("Sign Up",
-                      style: TextStyle(color: Colors.black),))
-                  ],
-                ),
-                Center(
-                  child: TextButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.amber,
-                      ),onPressed: ()
-                  {
-                    //Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPage()));
-                  }, child: Text("Forgot Password",
-                    style: TextStyle(color: Colors.black),)),
-                ),
                 Center(
                   child: TextButton(
                       style: ElevatedButton.styleFrom(

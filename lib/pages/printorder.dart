@@ -31,7 +31,7 @@ class _PrintListPageState extends State<PrintListPage> {
 
   Future<void> downloadFile(String docPath) async {
     try {
-      var response = await http.get(Uri.parse('http://192.168.211.53:3001/uploads/$docPath'));
+      var response = await http.get(Uri.parse('http://192.168.178.53:3001/uploads/$docPath'));
 
       if (response.statusCode == 200) {
         String? contentType = response.headers['content-type'];
@@ -106,11 +106,7 @@ class _PrintListPageState extends State<PrintListPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.filter_list),
-                        color: Colors.white,
-                        onPressed: () {},
-                      ),
+                     SizedBox(width: 30,),
                      PopupMenuButton<String>(
                           icon: Icon(Icons.menu,color: Colors.white,),
                          itemBuilder:(BuildContext context)=><PopupMenuEntry<String>>[
@@ -159,9 +155,8 @@ class _PrintListPageState extends State<PrintListPage> {
                 controller: searchController,
                 decoration: InputDecoration(
                   filled: true,
-                  suffixIcon: Icon(Icons.search),
                   fillColor: Colors.white,
-                  hintText: 'Search by name or type',
+                  hintText: '',
                   contentPadding: EdgeInsets.all(15),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
@@ -261,6 +256,7 @@ class _PrintListPageState extends State<PrintListPage> {
                                 ),
                                 trailing: IconButton(
                                   onPressed: () {
+                                    print(transactionData[index].docpath.toString());
                                     downloadFile(transactionData[index].docpath.toString());
                                   },
                                   icon: Icon(Icons.download),
