@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pringooo/models/transactionModel.dart';
+import 'package:pringooo/pages/home.dart';
 import 'package:pringooo/pages/uploadingscreen.dart';
 import 'package:pringooo/services/transactionService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -98,24 +99,16 @@ class _ViewTransactionPageState extends State<ViewTransactionPage> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: TextField(
-                      autofocus: false,
-                      style: TextStyle(fontSize: 15.0, color: Color(0xFFbdc6cf)),
-                      controller: n1,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: '',
-                        contentPadding: const EdgeInsets.all(15),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(25.7),
+                    child: Row(
+                      children: <Widget>[
+                        SizedBox(width: 400,
+                          child: ElevatedButton(onPressed:(){Navigator.push(context,MaterialPageRoute(builder: (context) => MyHomePage()));
+                          },
+                            child: Text("HOME PAGE"),),
                         ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(25.7),
-                        ),
-                      ),
+                        SizedBox(width: 10.0),
+
+                      ],
                     ),
                   ),
                   SizedBox(width: 10.0),
@@ -170,13 +163,24 @@ class _ViewTransactionPageState extends State<ViewTransactionPage> {
                                           ],
                                         ),
                                       ),
+                                      Column(
+                                        children: [
+                                          SizedBox(height: 20,),
+                                          Text(transactionData[index].amount.toString(), style: TextStyle(fontWeight: FontWeight.w500)),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          SizedBox(height: 20,),
+                                          Icon(Icons.currency_rupee),
+                                        ],
+                                      )
                                     ],
                                   ),
                                   subtitle: Text(
                                     transactionData[index].datetime.toString(),
                                     style: TextStyle(fontWeight: FontWeight.w500),
                                   ),
-                                  trailing: Text(transactionData[index].amount.toString()+"rs", style: TextStyle(fontWeight: FontWeight.w500)),
                                 ),
                               );
                             },

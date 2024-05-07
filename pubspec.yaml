@@ -70,6 +70,7 @@ flutter:
   assets:
   - assets/undraw_printing_invoices_-5-r4r.svg
   - assets/undraw_education_f8ru.svg
+  - assets/undraw_credit_card_re_blml.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

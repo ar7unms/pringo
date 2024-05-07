@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pringooo/models/bindmodel.dart';
@@ -94,8 +95,12 @@ class _todaytransPageState extends State<todaytransPage> {
                   },
                 ),
 
-                SizedBox(width: 30),
-
+                SvgPicture.asset(
+                  'assets/undraw_credit_card_re_blml.svg',
+                  width: 100, // Set the width of the SVG image
+                  height: 100, // Set the height of the SVG image
+                ),
+                SizedBox(width: 50,)
               ],
             ),
             SizedBox(height: 25.0),
@@ -150,7 +155,7 @@ class _todaytransPageState extends State<todaytransPage> {
                                 children: [
                                   Center(
                                     child: Text(
-                                      'TOTAL PRINT',
+                                      'TOTAL PRINT AMOUNT',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 25.0,
@@ -159,13 +164,19 @@ class _todaytransPageState extends State<todaytransPage> {
                                     ),
                                   ),
                                   Center(
-                                    child: Text(
-                                      printamount,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 25.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          printamount,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 70.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Icon(size:70,Icons.currency_rupee,color: Colors.white,)
+                                      ],
                                     ),
                                   ),
                                 ],
@@ -200,13 +211,19 @@ class _todaytransPageState extends State<todaytransPage> {
                                 ),
                               ),
                               Center(
-                                child: Text(
-                                  bindamount,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 25.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                child:  Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      bindamount,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 70.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Icon(size:70,Icons.currency_rupee,color: Colors.white,)
+                                  ],
                                 ),
                               ),
                             ],
@@ -241,13 +258,19 @@ class _todaytransPageState extends State<todaytransPage> {
                                     ),
                                   ),
                                   Center(
-                                    child: Text(
-                                      amount,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 25.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    child:  Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          amount,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 70.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Icon(size:70,Icons.currency_rupee,color: Colors.white,)
+                                      ],
                                     ),
                                   ),
                                 ],
